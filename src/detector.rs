@@ -1,6 +1,5 @@
 use crate::monitor::MarketSnapshot;
 use rust_decimal::Decimal;
-use std::convert::TryFrom;
 use std::sync::Arc;
 use std::collections::HashMap;
 use tokio::sync::Mutex;
@@ -48,10 +47,6 @@ pub struct BuyOpportunity {
     pub time_remaining_seconds: u64,
     pub time_elapsed_seconds: u64, // How many seconds have elapsed in this period
     pub use_market_order: bool, // If true, use market order; if false, use limit order
-    pub investment_amount_override: Option<f64>, // Optional override for investment amount (e.g., for individual hedges that need double amount)
-    pub is_individual_hedge: bool, // If true, this is an individual hedge that should place a limit sell order after buy
-    pub is_standard_hedge: bool, // If true, this is a standard hedge (after dual_limit_hedge_after_minutes) that should place a limit sell order at $0.98
-    pub dual_limit_shares: Option<f64>, // Optional dual_limit_shares value for placing sell orders
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
@@ -244,10 +239,6 @@ impl PriceDetector {
             time_remaining_seconds: snapshot.time_remaining_seconds,
             time_elapsed_seconds,
             use_market_order: false, // Regular detect_opportunities always uses market orders
-            investment_amount_override: None,
-            is_individual_hedge: false,
-            is_standard_hedge: false,
-            dual_limit_shares: None,
         })
     }
 
@@ -402,10 +393,6 @@ impl PriceDetector {
                 time_remaining_seconds: snapshot.time_remaining_seconds,
                 time_elapsed_seconds,
                 use_market_order: true, // Always use market order
-                investment_amount_override: None,
-                is_individual_hedge: false,
-                is_standard_hedge: false,
-                dual_limit_shares: None,
             });
         }
 
@@ -426,10 +413,6 @@ impl PriceDetector {
                 time_remaining_seconds: snapshot.time_remaining_seconds,
                 time_elapsed_seconds,
                 use_market_order: true, // Always use market order
-                investment_amount_override: None,
-                is_individual_hedge: false,
-                is_standard_hedge: false,
-                dual_limit_shares: None,
             });
         }
 
@@ -451,10 +434,6 @@ impl PriceDetector {
                     time_remaining_seconds: snapshot.time_remaining_seconds,
                     time_elapsed_seconds,
                     use_market_order: true, // Always use market order
-                    investment_amount_override: None,
-                    is_individual_hedge: false,
-                    is_standard_hedge: false,
-                    dual_limit_shares: None,
                 });
             }
             if let Some(eth_down) = snapshot.eth_market.down_token.as_ref() {
@@ -473,10 +452,6 @@ impl PriceDetector {
                     time_remaining_seconds: snapshot.time_remaining_seconds,
                     time_elapsed_seconds,
                     use_market_order: true, // Always use market order
-                    investment_amount_override: None,
-                    is_individual_hedge: false,
-                    is_standard_hedge: false,
-                    dual_limit_shares: None,
                 });
             }
         }
@@ -499,10 +474,6 @@ impl PriceDetector {
                     time_remaining_seconds: snapshot.time_remaining_seconds,
                     time_elapsed_seconds,
                     use_market_order: true, // Always use market order
-                    investment_amount_override: None,
-                    is_individual_hedge: false,
-                    is_standard_hedge: false,
-                    dual_limit_shares: None,
                 });
             }
             if let Some(solana_down) = snapshot.solana_market.down_token.as_ref() {
@@ -521,10 +492,6 @@ impl PriceDetector {
                     time_remaining_seconds: snapshot.time_remaining_seconds,
                     time_elapsed_seconds,
                     use_market_order: true, // Always use market order
-                    investment_amount_override: None,
-                    is_individual_hedge: false,
-                    is_standard_hedge: false,
-                    dual_limit_shares: None,
                 });
             }
         }
@@ -545,10 +512,6 @@ impl PriceDetector {
                     time_remaining_seconds: snapshot.time_remaining_seconds,
                     time_elapsed_seconds,
                     use_market_order: true,
-                    investment_amount_override: None,
-                    is_individual_hedge: false,
-                    is_standard_hedge: false,
-                    dual_limit_shares: None,
                 });
             }
             if let Some(xrp_down) = snapshot.xrp_market.down_token.as_ref() {
@@ -565,10 +528,6 @@ impl PriceDetector {
                     time_remaining_seconds: snapshot.time_remaining_seconds,
                     time_elapsed_seconds,
                     use_market_order: true,
-                    investment_amount_override: None,
-                    is_individual_hedge: false,
-                    is_standard_hedge: false,
-                    dual_limit_shares: None,
                 });
             }
         }

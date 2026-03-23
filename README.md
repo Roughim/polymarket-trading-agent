@@ -354,54 +354,65 @@ This project serves the UI and backend together, so the setup is relatively simp
 
 ## Project structure
 
+This repository is the backend trading engine that powers `polymarket-copy-trading-bot-agent`.
+
+It is centered on Rust trading logic and uses the `polymarket-client-sdk` crate for Polymarket API, data, and websocket access.
+
 If you want to explore the code, here is the easiest mental model:
 
-### Main entry
+### Core library modules
 
-* `src/bin/main_copytrading.rs`
-  Starts the app, serves the dashboard, and exposes **agent** endpoints
-
-### Polymarket API and core setup
-
+* `src/lib.rs`
+  Library entry point, module exports, and shared history logging helpers
 * `src/api.rs`
-  **Polymarket** API client
-* `src/clob_sdk.rs`
-  CLOB SDK integration
+  High-level Polymarket API wrapper built on top of `polymarket-client-sdk`
 * `src/config.rs`
-  CLI args and config loading
+  Config structs, defaults, and CLI/runtime configuration loading
 * `src/models.rs`
-  Shared data models for **trading** and market state
+  Shared domain models for markets, tokens, prices, and trading state
+* `src/merge.rs`
+  Merge-related helpers for outcome token handling
 
-### Trading logic
+### Trading and execution
 
-* `src/copy_trading.rs`
-  Copy **trading** logic, filters, exits, and config
 * `src/trader.rs`
-  Order handling and portfolio updates
+  Main trading engine, order placement flow, position management, and execution logic
 * `src/simulation.rs`
-  Simulation mode
-* `src/backtest.rs`
-  Backtest logic
-
-### Monitoring
-
-* `src/activity_stream.rs`
-  Real-time **Polymarket** activity stream
+  Simulation and dry-run behavior for testing strategies without live execution
 * `src/detector.rs`
-  Opportunity detection
+  Signal and opportunity detection logic used before trade execution
+
+### Monitoring and market tracking
+
 * `src/monitor.rs`
-  Market monitoring
-* `src/rtds.rs`
-  External price feed support
+  Market monitoring loop, price tracking, and runtime coordination for strategies
 
-### Web state and UI
+### Binaries
 
-* `src/web_state.rs`
-  Dashboard state and API output
-* `src/logging.rs`
-  Trade and system logs
+* `src/bin/main_dual_limit_045.rs`
+  Main strategy entry point and current default run target
+* `src/bin/main_price_monitor.rs`
+  Standalone market/price monitor binary
+
+### Utility and test binaries
+
+* `src/bin/test_allowance.rs`
+  Checks token allowance-related behavior
+* `src/bin/test_limit_order.rs`
+  Tests limit order flow
+* `src/bin/test_merge.rs`
+  Tests merge behavior
+* `src/bin/test_predict_fun.rs`
+  Utility test binary for prediction-related workflows
+* `src/bin/test_redeem.rs`
+  Tests redemption flow
+* `src/bin/test_sell.rs`
+  Tests sell order flow
+
+### Frontend folder
+
 * `frontend/`
-  The web dashboard for **Polymarket trading** and the AI **agent**
+  Auxiliary frontend code kept alongside the backend project; the main dashboard product lives in `polymarket-copy-trading-bot-agent`
 
 ---
 
