@@ -429,4 +429,6 @@ It is especially useful if you want faster execution and a more organized **trad
 
 ---
 
+For the best version of this product, contact me.
+
 **Contact:** [@snipmaxi](https://t.me/snipmaxi)
