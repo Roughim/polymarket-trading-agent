@@ -1,10 +1,5 @@
 # Polymarket Copy Trading Agent
 Rust backend · Real-time Polymarket stream · Web dashboard · AI agent for trading research
-
----
-
-## Welcome
-
 This project is a **Polymarket copy trading agent** built for people who want a smoother way to trade on **Polymarket**.
 
 Instead of manually checking wallets, refreshing markets, and trying to react late, this project helps you handle **Polymarket trading** from one place. You can watch trader activity, copy trades, monitor positions, and use an **AI agent** to research markets before making decisions.
@@ -258,18 +253,6 @@ show result in dashboard, logs, and portfolio
 ```
 
 So the project is always centered around real-time **Polymarket trading**.
-
----
-
-## Screenshots
-
-| Dashboard | Agent | Logs |
-|:---:|:---:|:---:|
-| ![Dashboard](docs/screenshots/dashboard.png) | ![Agent](docs/screenshots/agent.png) | ![Logs](docs/screenshots/logs.png) |
-
-| Top Traders | Portfolio | Settings |
-|:---:|:---:|:---:|
-| ![Top Traders](docs/screenshots/toptraders.png) | ![Portfolio](docs/screenshots/portfolio.png) | ![Settings](docs/screenshots/settings.png) |
 
 ---
 
