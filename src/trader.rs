@@ -560,46 +560,6 @@ impl Trader {
             }
         }
         
-        // For simulation mode, store the trade
-        if self.simulation_mode {
-            crate::log_println!("   📝 Storing trade: {} token ID: {}...", 
-                  opportunity.token_type.display_name(), &opportunity.token_id[..16]);
-        
-        let trade = PendingTrade {
-                token_id: opportunity.token_id.clone(),
-                condition_id: opportunity.condition_id.clone(),
-                token_type: opportunity.token_type.clone(),
-            investment_amount: fixed_amount,
-            units,
-                purchase_price: opportunity.bid_price,
-            sell_price: self.config.sell_price,
-            timestamp: std::time::Instant::now(),
-            market_timestamp: opportunity.period_timestamp,
-            sold: false,
-                confirmed_balance: None,
-                buy_order_confirmed: false,
-                limit_sell_orders_placed: false, // Will be set to true after placing sell orders
-                no_sell: false,
-                claim_on_closure: false,
-                sell_attempts: 0,
-                redemption_attempts: 0,
-                redemption_abandoned: false,
-            };
-            
-            // Use token_id as key to track individual tokens
-            let trade_key = format!("{}_{}", opportunity.period_timestamp, opportunity.token_id);
-        let mut pending = self.pending_trades.lock().await;
-        pending.insert(trade_key, trade);
-        drop(pending);
-        
-            crate::log_println!("   ✅ Trade stored successfully. Will monitor price and sell at ${:.6} or market close.", 
-              self.config.sell_price);
-        
-        let mut trades = self.trades_executed.lock().await;
-        *trades += 1;
-        drop(trades);
-        }
-        
         Ok(())
     }
 
